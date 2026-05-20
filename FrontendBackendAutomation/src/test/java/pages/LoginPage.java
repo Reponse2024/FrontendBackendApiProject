@@ -15,6 +15,7 @@ public class LoginPage {
     public void navigateToLoginPage() {
         page.click(signInLink);
         page.waitForSelector(emailInput);
+
     }
     public void login(String email, String password) {
         page.fill(emailInput, email);

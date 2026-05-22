@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import constants.AppConstants;
 import org.testng.Assert;
 import pages.FilterPage;
+import pages.SortingPage;
 
 public class AssertionUtils {
     public static void assertProductsOrMessage(FilterPage filterPage, String context) {
@@ -40,4 +41,14 @@ public class AssertionUtils {
         Assert.assertTrue(page.locator(AppConstants.LOGIN_BUTTON).isVisible(),
                 "Login button should still be visible");
     }
+
+    // Sorting Specific Assertions
+    public static void assertSortApplied(SortingPage sortingPage, String expectedOption) {
+        String current = sortingPage.getCurrentSortSelection();
+        Assert.assertEquals(current, expectedOption,
+                "Sorting option should be applied: " + expectedOption);
+        Assert.assertTrue(sortingPage.isProductListVisible() || sortingPage.isNoProductsMessageVisible(),
+                "Products or no-products message should be visible after sorting");
+    }
+
 }

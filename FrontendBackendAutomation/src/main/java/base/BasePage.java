@@ -9,11 +9,19 @@ public class BasePage {
     public BasePage(Page page) {
         this.page = page;
     }
-    public void navigateTo(String endpoint) {
-        page.navigate(AppConstants.BASE_URL + endpoint);
-        page.waitForURL("**" + endpoint);
-    }
+
     public String getCurrentUrl() {
         return page.url();
     }
+
+    public void goToBaseUrl() {
+        page.navigate(AppConstants.BASE_URL);
+        page.waitForSelector(AppConstants.START_SHOPPING_LINK);
+    }
+
+    public void clickStartShopping() {
+        page.click(AppConstants.START_SHOPPING_LINK);
+        page.waitForSelector(AppConstants.SHOP_NOW_BUTTON);
+    }
+
 }

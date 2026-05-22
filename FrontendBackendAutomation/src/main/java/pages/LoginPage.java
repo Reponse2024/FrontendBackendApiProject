@@ -1,30 +1,26 @@
 package pages;
 
 import com.microsoft.playwright.Page;
+import constants.AppConstants;
 
 public class LoginPage {
     private final Page page;
-    private final String signInLink = "a.btn-ghost.text-sm.py-2.px-4";
-    private final String emailInput = "input[type='email'][placeholder='you@example.com']";
-    private final String passwordInput = "input[type='password'][placeholder='••••••••']";
-    private final String loginButton = "button.btn-primary";
 
     public LoginPage(Page page) {
         this.page = page;
     }
     public void navigateToLoginPage() {
-        page.click(signInLink);
-        page.waitForSelector(emailInput);
-
+        page.click(AppConstants.SIGN_IN_LINK);
+        page.waitForSelector(AppConstants.LOGIN_EMAIL_INPUT);
     }
     public void login(String email, String password) {
-        page.fill(emailInput, email);
-        page.fill(passwordInput, password);
-        page.waitForNavigation(() -> page.click(loginButton));
+        page.fill(AppConstants.LOGIN_EMAIL_INPUT, email);
+        page.fill(AppConstants.LOGIN_PASSWORD_INPUT, password);
+        page.waitForNavigation(() -> page.click(AppConstants.LOGIN_BUTTON));
     }
     public void loginWithEmptyFields() {
-        page.fill(emailInput, "");
-        page.fill(passwordInput, "");
-        page.click(loginButton);
+        page.fill(AppConstants.LOGIN_EMAIL_INPUT, "");
+        page.fill(AppConstants.LOGIN_PASSWORD_INPUT, "");
+        page.click(AppConstants.LOGIN_BUTTON);
     }
 }

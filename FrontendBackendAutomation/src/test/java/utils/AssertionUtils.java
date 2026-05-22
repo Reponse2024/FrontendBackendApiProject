@@ -1,5 +1,7 @@
 package utils;
 
+import com.microsoft.playwright.Page;
+import constants.AppConstants;
 import org.testng.Assert;
 import pages.FilterPage;
 
@@ -15,9 +17,27 @@ public class AssertionUtils {
                     "Products appear for " + context);
         }
     }
-
     public static void assertUrlContains(String url, String endpoint) {
         Assert.assertTrue(url.contains(endpoint),
                 "URL should contain " + endpoint);
+    }
+
+    // Login specific assertions
+
+    public static void assertValidLogin(Page page) {
+        Assert.assertTrue(page.url().contains(AppConstants.HOME_ENDPOINT),
+                "User should be redirected to " + AppConstants.HOME_ENDPOINT + " after login");
+        Assert.assertTrue(page.locator(AppConstants.LOGIN_PAGE_HEADING).isVisible(),
+                "Home page heading should be visible");
+    }
+    public static void assertInvalidLogin(Page page) {
+        Assert.assertTrue(page.url().contains(AppConstants.LOGIN_ENDPOINT),
+                "User should remain on " + AppConstants.LOGIN_ENDPOINT + " after invalid login");
+        Assert.assertTrue(page.locator(AppConstants.LOGIN_EMAIL_INPUT).isVisible(),
+                "Email input should still be visible");
+        Assert.assertTrue(page.locator(AppConstants.LOGIN_PASSWORD_INPUT).isVisible(),
+                "Password input should still be visible");
+        Assert.assertTrue(page.locator(AppConstants.LOGIN_BUTTON).isVisible(),
+                "Login button should still be visible");
     }
 }

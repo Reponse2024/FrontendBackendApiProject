@@ -1,8 +1,9 @@
-package tests;
+package tests.login;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import tests.BaseTest;
 
 public class LoginTest extends BaseTest {
     @Test

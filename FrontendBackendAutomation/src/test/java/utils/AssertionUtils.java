@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import constants.AppConstants;
 import org.testng.Assert;
 import pages.FilterPage;
+import pages.ProductPage;
 import pages.SortingPage;
 
 public class AssertionUtils {
@@ -50,5 +51,30 @@ public class AssertionUtils {
         Assert.assertTrue(sortingPage.isProductListVisible() || sortingPage.isNoProductsMessageVisible(),
                 "Products or no-products message should be visible after sorting");
     }
+
+    //Adding to Cart Specific Assertions
+    public static void assertQuickAdd(ProductPage productPage, String expectedProductName) {
+        Assert.assertTrue(productPage.isCartIconVisible(),
+                "Cart icon should be visible after Quick Add of " + expectedProductName);
+        Assert.assertTrue(productPage.getCartCount() > 0,
+                "Cart count should increase after Quick Add.");
+    }
+
+    public static void assertAddToCart(ProductPage productPage, String expectedProductName) {
+        Assert.assertTrue(productPage.isCartIconVisible(),
+                "Cart icon should be visible after Add to Cart of " + expectedProductName);
+        Assert.assertTrue(productPage.getCartCount() > 0,
+                "Cart count should increase after Add to Cart.");
+    }
+
+    public static void assertCartItemCount(ProductPage productPage, int expectedCount) {
+        Assert.assertEquals(productPage.getCartCount(), expectedCount,
+                "Cart should contain " + expectedCount + " items.");
+    }
+    public static void assertProductInCart(ProductPage productPage, String expectedProductName) {
+        Assert.assertTrue(productPage.isProductInCart(expectedProductName),
+                "Cart should contain the product: " + expectedProductName);
+    }
+
 
 }

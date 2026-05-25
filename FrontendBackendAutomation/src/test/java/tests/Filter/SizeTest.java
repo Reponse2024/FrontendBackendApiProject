@@ -2,27 +2,21 @@ package tests.Filter;
 
 import com.microsoft.playwright.Page;
 import constants.AppConstants;
+import constants.FilterConstants;
 import factories.DriverFactory;
 import org.testng.annotations.Test;
 import pages.FilterPage;
-import pages.HomePage;
-import pages.LoginPage;
 import utils.AssertionUtils;
+import utils.HandleLoginFailure;
 import utils.WaitUtils;
 
 public class SizeTest {
     @Test
     public void testAllSizes() {
-        Page page = DriverFactory.initDriver();
-        LoginPage loginPage = new LoginPage(page);
-        HomePage homePage = new HomePage(page);
+        Page page = HandleLoginFailure.setupAndNavigate();
         FilterPage filterPage = new FilterPage(page);
 
-        loginPage.navigateToLoginPage();
-        loginPage.login(AppConstants.ADMIN_EMAIL, AppConstants.ADMIN_PASSWORD);
-        homePage.goToProducts();
-
-        for (String size : AppConstants.SIZES) {
+        for (String size : FilterConstants.SIZES) {
             filterPage.selectSize(size);
             WaitUtils.shortPause(page);
             AssertionUtils.assertProductsOrMessage(filterPage, "size: " + size);

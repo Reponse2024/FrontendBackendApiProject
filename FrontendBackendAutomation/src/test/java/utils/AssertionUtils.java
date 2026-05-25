@@ -71,4 +71,10 @@ public class AssertionUtils {
         Assert.assertEquals(productPage.getCartCount(), expectedCount,
                 "Cart should contain " + expectedCount + " items.");
     }
+    public static void assertProductInCart(ProductPage productPage, String expectedProductName) {
+        Assert.assertTrue(productPage.isProductInCart(expectedProductName),
+                "Cart should contain the product: " + expectedProductName);
+    }
+
+
 }

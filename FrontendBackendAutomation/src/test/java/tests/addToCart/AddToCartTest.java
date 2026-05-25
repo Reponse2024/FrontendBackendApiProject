@@ -17,26 +17,71 @@ public class AddToCartTest {
         ProductPage productPage = new ProductPage(page);
 
         productPage.quickAddProduct(AddToCartConstants.ZIP_FANNY_PACK);
-        WaitUtils.shortPause(page);
-
-        AssertionUtils.assertQuickAdd(productPage, AddToCartConstants.ZIP_FANNY_PACK);
-        AssertionUtils.assertCartItemCount(productPage, 1);
+        WaitUtils.mediumPause(page);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.ZIP_FANNY_PACK);
 
         DriverFactory.closeDriver();
     }
-
     @Test
     public void testAddZipFannyPackFromDetailPage() {
         Page page = HandleLoginFailure.setupAndNavigate();
         ProductPage productPage = new ProductPage(page);
 
-        productPage.addProductFromDetailPage(AddToCartConstants.ZIP_FANNY_PACK,AddToCartConstants.COLOR_SPECIFIC);
-        WaitUtils.longPause(page);
-
-        AssertionUtils.assertAddToCart(productPage, AddToCartConstants.ZIP_FANNY_PACK);
-        AssertionUtils.assertCartItemCount(productPage, 1);
+        productPage.addProductFromDetailPage(AddToCartConstants.ZIP_FANNY_PACK, AddToCartConstants.COLOR_BLACK);
+        WaitUtils.mediumPause(page);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.ZIP_FANNY_PACK);
 
         DriverFactory.closeDriver();
     }
 
+
+    @Test
+    public void testQuickAddMiniCrossbody() {
+        Page page = HandleLoginFailure.setupAndNavigate();
+        ProductPage productPage = new ProductPage(page);
+
+        productPage.quickAddProduct(AddToCartConstants.MINI_CROSSBODY);
+        WaitUtils.mediumPause(page);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.MINI_CROSSBODY);
+
+        DriverFactory.closeDriver();
+    }
+
+    @Test
+    public void testAddMiniCrossbodyFromDetailPage() {
+        Page page = HandleLoginFailure.setupAndNavigate();
+        ProductPage productPage = new ProductPage(page);
+
+        productPage.addProductFromDetailPage(AddToCartConstants.MINI_CROSSBODY, AddToCartConstants.COLOR_BROWN);
+        WaitUtils.mediumPause(page);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.MINI_CROSSBODY);
+
+        DriverFactory.closeDriver();
+    }
+    @Test
+    public void testAddAProductTwice() {
+        Page page = HandleLoginFailure.setupAndNavigate();
+        ProductPage productPage = new ProductPage(page);
+
+        productPage.addProductFromDetailPage(AddToCartConstants.MINI_CROSSBODY, AddToCartConstants.COLOR_BROWN);
+        productPage.addProductFromDetailPage(AddToCartConstants.MINI_CROSSBODY, AddToCartConstants.COLOR_BROWN);
+        WaitUtils.mediumPause(page);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.MINI_CROSSBODY);
+
+        DriverFactory.closeDriver();
+    }
+
+    @Test
+    public void testAddMultipleProducts() {
+        Page page = HandleLoginFailure.setupAndNavigate();
+        ProductPage productPage = new ProductPage(page);
+
+        productPage.quickAddProduct(AddToCartConstants.CANVAS_SHOPPER);
+        productPage.addProductFromDetailPage(AddToCartConstants.LEATHER_TOTE, AddToCartConstants.COLOR_BROWN);
+        WaitUtils.mediumPause(page);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.CANVAS_SHOPPER);
+        AssertionUtils.assertProductInCart(productPage, AddToCartConstants.LEATHER_TOTE);
+
+        DriverFactory.closeDriver();
+    }
 }

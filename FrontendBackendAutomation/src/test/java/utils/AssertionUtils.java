@@ -2,6 +2,7 @@ package utils;
 
 import com.microsoft.playwright.Page;
 import constants.AppConstants;
+import constants.CheckoutFlowConstants;
 import org.testng.Assert;
 import pages.FilterPage;
 import pages.ProductPage;
@@ -59,21 +60,14 @@ public class AssertionUtils {
         Assert.assertTrue(productPage.getCartCount() > 0,
                 "Cart count should increase after Quick Add.");
     }
-
-    public static void assertAddToCart(ProductPage productPage, String expectedProductName) {
-        Assert.assertTrue(productPage.isCartIconVisible(),
-                "Cart icon should be visible after Add to Cart of " + expectedProductName);
-        Assert.assertTrue(productPage.getCartCount() > 0,
-                "Cart count should increase after Add to Cart.");
-    }
-
-    public static void assertCartItemCount(ProductPage productPage, int expectedCount) {
-        Assert.assertEquals(productPage.getCartCount(), expectedCount,
-                "Cart should contain " + expectedCount + " items.");
-    }
     public static void assertProductInCart(ProductPage productPage, String expectedProductName) {
         Assert.assertTrue(productPage.isProductInCart(expectedProductName),
                 "Cart should contain the product: " + expectedProductName);
+    }
+
+    //Checkout Flow Specific Assertions
+    public static void assertOrderPlaced(Page page){
+        Assert.assertTrue(page.locator(CheckoutFlowConstants.ORDER_SUCCESS_MESSAGE).isVisible(), "Order success message should be visible");
     }
 
 

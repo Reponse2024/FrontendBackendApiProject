@@ -13,8 +13,8 @@ public class AppConstants {
     public static final String LOGIN_EMAIL_INPUT = "input[type='email'][placeholder='you@example.com']";
     public static final String LOGIN_PASSWORD_INPUT = "input[type='password'][placeholder='••••••••']";
     public static final String LOGIN_BUTTON = "button.btn-primary";
-    public static final String ADMIN_EMAIL = "admin@thinkandgetit.com";
-    public static final String ADMIN_PASSWORD = "Admin@123456";
+    public static final String ADMIN_EMAIL = "tom@thinkandgetit.com";
+    public static final String ADMIN_PASSWORD = "Tom@123456";
     public static final String INVALID_EMAIL = "invalid@user.com";
     public static final String INVALID_PASSWORD = "InvalidPassword123";
     public static final String PRODUCT_CARD = "a.group.card-hover.block";

@@ -2,6 +2,7 @@ package base;
 
 import com.microsoft.playwright.Page;
 import constants.AppConstants;
+import constants.RegisterConstants;
 
 public class BasePage {
     protected Page page;
@@ -22,6 +23,9 @@ public class BasePage {
     public void clickStartShopping() {
         page.click(AppConstants.START_SHOPPING_LINK);
         page.waitForSelector(AppConstants.SHOP_NOW_BUTTON);
+    }
+    public void clickCreateAccountButton(){
+        page.click(RegisterConstants.CREATE_ACCOUNT_BUTTON);
     }
 
 }

@@ -3,6 +3,7 @@ package utils;
 import com.microsoft.playwright.Page;
 import constants.AppConstants;
 import constants.CheckoutFlowConstants;
+import constants.RegisterConstants;
 import org.testng.Assert;
 import pages.FilterPage;
 import pages.ProductPage;
@@ -70,5 +71,42 @@ public class AssertionUtils {
         Assert.assertTrue(page.locator(CheckoutFlowConstants.ORDER_SUCCESS_MESSAGE).isVisible(), "Order success message should be visible");
     }
 
+    //Register Specific Assertions
+    public static void assertRegistrationSuccess(Page page) {
+            WaitUtils.mediumPause(page);
+            Assert.assertTrue(page.url().contains(AppConstants.HOME_ENDPOINT),
+                    "User should be redirected to homepage after registration");
+    }
+
+    public static void assertPasswordError(Page page) {
+            Assert.assertTrue(page.locator(RegisterConstants.PASSWORD_ERROR).isVisible(),
+                    "Weak password error should be displayed");
+    }
+
+    public static void assertDuplicateEmailError(Page page) {
+        page.waitForSelector(RegisterConstants.DUPLICATE_EMAIL_TOAST);
+        Assert.assertTrue(page.locator(RegisterConstants.DUPLICATE_EMAIL_TOAST).isVisible(),
+                "Duplicate email error toast should be displayed");
+    }
+
+    public static void assertInvalidEmail(Page page) {
+        boolean isInvalid = (boolean) page.evaluate(
+                "document.querySelector('input[type=\"email\"]').checkValidity() === false"
+        );
+        String validationMessage = (String) page.evaluate(
+                "document.querySelector('input[type=\"email\"]').validationMessage"
+        );
+
+        Assert.assertTrue(isInvalid, "Email field should be invalid");
+        System.out.println("Browser validation message: " + validationMessage);
+    }
+
+    public static void assertEmptyField(Page page, String selector) {
+        boolean isInvalid = (boolean) page.locator(selector).evaluate("el => !el.checkValidity()");
+        String validationMessage = (String) page.locator(selector).evaluate("el => el.validationMessage");
+
+        Assert.assertTrue(isInvalid, "Field should be invalid when empty");
+        System.out.println("Browser validation message: " + validationMessage);
+    }
 
 }

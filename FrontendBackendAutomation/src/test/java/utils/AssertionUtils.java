@@ -73,7 +73,7 @@ public class AssertionUtils {
 
     //Register Specific Assertions
     public static void assertRegistrationSuccess(Page page) {
-            page.waitForSelector(AppConstants.HOME_ENDPOINT);
+            WaitUtils.mediumPause(page);
             Assert.assertTrue(page.url().contains(AppConstants.HOME_ENDPOINT),
                     "User should be redirected to homepage after registration");
     }

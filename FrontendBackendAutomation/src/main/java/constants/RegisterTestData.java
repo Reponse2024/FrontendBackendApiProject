@@ -1,9 +1,9 @@
 package constants;
 
 public class RegisterTestData {
-    public static final String FIRST_NAME = "Tom";
+    public static final String FIRST_NAME = "Jonathan";
     public static final String LAST_NAME = "Thinker";
-    public static final String EMAIL = "jjmy@thinkandgetit.com";
+    public static final String EMAIL = "jonat@thinkandgetit.com";
     public static final String PASSWORD = "Tom@123456";
 
     public static final String INVALID_EMAIL = "abc@";

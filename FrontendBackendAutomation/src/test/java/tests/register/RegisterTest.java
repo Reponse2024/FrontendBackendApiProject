@@ -27,7 +27,6 @@ public class RegisterTest {
                 RegisterTestData.PASSWORD
         );
         registerPage.submitRegistration();
-
         AssertionUtils.assertRegistrationSuccess(page);
         DriverFactory.closeDriver();
     }

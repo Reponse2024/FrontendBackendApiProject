@@ -3,6 +3,7 @@ package utils;
 import com.microsoft.playwright.Page;
 import constants.AppConstants;
 import constants.CheckoutFlowConstants;
+import constants.NavigationConstants;
 import constants.RegisterConstants;
 import org.testng.Assert;
 import pages.FilterPage;
@@ -109,4 +110,23 @@ public class AssertionUtils {
         System.out.println("Browser validation message: " + validationMessage);
     }
 
+    //Navigation Specific Assertions
+    public static void assertHomePage(Page page) {
+        WaitUtils.mediumPause(page);
+        Assert.assertTrue(page.url().endsWith(AppConstants.HOME_ENDPOINT), "Home page URL should end with /home");
+    }
+    public static void assertShopPage(Page page) {
+        WaitUtils.mediumPause(page);
+        Assert.assertTrue(page.url().endsWith(AppConstants.PRODUCTS_ENDPOINT), "Shop page URL should end with /products");
+    }
+    public static void assertFlashPage(Page page) {
+        WaitUtils.mediumPause(page);
+        Assert.assertTrue(page.url().contains("flash_sale=true"),
+                "Flash Sale URL should contain flash_sale=true");
+    }
+    public static void assertFeaturedPage(Page page) {
+        WaitUtils.mediumPause(page);
+        Assert.assertTrue(page.url().contains("featured=true"),
+                "Featured URL should contain featured=true");
+    }
 }

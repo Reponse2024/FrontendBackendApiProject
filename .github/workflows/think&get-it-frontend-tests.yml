@@ -27,16 +27,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('FrontendBackendAutomation/**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('FrontendBackendAutomation/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven
 
       - name: Install Playwright browsers
-        working-directory: FrontendBackendAutomation
         run: mvn exec:java -Dexec.args="install"
+        working-directory: FrontendBackendAutomation
 
       - name: Run Playwright tests
-        working-directory: FrontendBackendAutomation
         run: mvn test
+        working-directory: FrontendBackendAutomation
 
       - name: Upload test reports
         if: always()

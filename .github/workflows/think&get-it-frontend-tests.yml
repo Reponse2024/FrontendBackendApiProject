@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron: "0 8 * * *"   # runs daily at 8 AM UTC
-  workflow_dispatch:       # allows manual trigger from Actions tab
+    - cron: "0 8 * * *"
+  workflow_dispatch:
 
 jobs:
   test:
@@ -27,13 +27,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('FrontendBackendAutomation/**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven
 
       - name: Install Playwright browsers
+        working-directory: FrontendBackendAutomation
         run: mvn exec:java -Dexec.args="install"
 
-      - name: Run all Playwright tests
+      - name: Run Playwright tests
+        working-directory: FrontendBackendAutomation
         run: mvn test
 
       - name: Upload test reports
@@ -41,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: target/surefire-reports/
+          path: FrontendBackendAutomation/target/surefire-reports/

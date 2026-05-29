@@ -5,17 +5,13 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch:       # manual trigger
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 6 * * *"    # daily at 6 AM UTC
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: FrontendBackendAutomation
 
     steps:
       - name: Checkout repository
@@ -31,18 +27,18 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('FrontendBackendAutomation/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven
 
-      - name: Install Playwright browsers
-        run: mvn -f FrontendBackendAutomation/pom.xml exec:java -Dexec.args="install"
+      # Playwright will install browsers automatically when tests run,
+      # so you can skip the exec:java step unless you have a custom goal.
 
       - name: Run Playwright tests
-        run: mvn -f FrontendBackendAutomation/pom.xml test
+        run: mvn test
 
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: FrontendBackendAutomation/target/surefire-reports/
+          path: target/surefire-reports/

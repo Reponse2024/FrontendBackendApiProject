@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FrontendBackendAPIsAutomation" />
+        <module name="playwright-tests" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="playwright-tests" target="17" />
+      <module name="FrontendBackendAPIsAutomation" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

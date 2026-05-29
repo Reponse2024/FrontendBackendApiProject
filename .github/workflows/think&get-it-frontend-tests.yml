@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: FrontendBackendAutomation   # 👈 this sets the folder for ALL steps
+        working-directory: FrontendBackendAutomation
 
     steps:
       - name: Checkout repository
@@ -35,10 +35,10 @@ jobs:
           restore-keys: ${{ runner.os }}-maven
 
       - name: Install Playwright browsers
-        run: mvn exec:java -Dexec.args="install"
+        run: mvn -f FrontendBackendAutomation/pom.xml exec:java -Dexec.args="install"
 
       - name: Run Playwright tests
-        run: mvn test
+        run: mvn -f FrontendBackendAutomation/pom.xml test
 
       - name: Upload test reports
         if: always()

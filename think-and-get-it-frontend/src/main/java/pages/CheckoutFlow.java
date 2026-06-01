@@ -22,7 +22,7 @@ public class CheckoutFlow {
         page.locator("input[placeholder='Country']").fill(country);
         page.locator("input[placeholder='Postal code (optional)']").fill(postalCode);
 
-        page.locator(CheckoutFlowConstants.SAVE_ADDRESS_BUTTON).click();
+        //page.locator(CheckoutFlowConstants.SAVE_ADDRESS_BUTTON).click();
     }
     public void continueToPayment(){
         page.locator(CheckoutFlowConstants.CONTINUE_TO_PAYMENT_BUTTON).click();

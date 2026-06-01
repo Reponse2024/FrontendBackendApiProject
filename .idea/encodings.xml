@@ -3,5 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/FrontendBackendAutomation/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FrontendBackendAutomation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/think-and-get-it-backend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/think-and-get-it-backend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/think-and-get-it-frontend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/think-and-get-it-frontend/src/main/resources" charset="UTF-8" />
   </component>
 </project>

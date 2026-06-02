@@ -18,3 +18,4 @@ public class ResetPasswordTest extends BaseTest {
         Assert.assertEquals(response.jsonPath().getString("message"), "Password reset successful");
     }
 }
+

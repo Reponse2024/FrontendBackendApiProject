@@ -1,5 +1,6 @@
 package base;
 
+import backend.constants.HttpStatus;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -25,7 +26,7 @@ public class BaseTest {
                 .build();
 
         responseSpec = new ResponseSpecBuilder()
-                .expectStatusCode(200)
+                .expectStatusCode(HttpStatus.OK.code())
                 .expectBody("success", equalTo(true))
                 .build();
     }

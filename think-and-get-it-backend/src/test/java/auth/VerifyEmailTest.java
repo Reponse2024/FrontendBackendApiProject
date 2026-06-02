@@ -8,9 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class VerifyEmailTest extends BaseTest {
-
     @Test
-    public void verifyEmail() {
+    public void VerifyEmail() {
         Response response = new AuthFlow().verifyEmail(requestSpec);
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());

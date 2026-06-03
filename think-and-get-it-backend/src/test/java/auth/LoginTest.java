@@ -5,9 +5,11 @@ import backend.constants.ResponsePaths;
 import backend.constants.ResponseMessages;
 import backend.constants.UserData;
 import backend.implementFlow.AuthFlow;
+import spec.SpecBuilder;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import static spec.SpecBuilder.getRequestSpec;
 
 public class LoginTest {

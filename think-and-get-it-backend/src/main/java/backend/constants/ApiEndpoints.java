@@ -15,4 +15,9 @@ public class ApiEndpoints {
     public static final String AVATAR = "/users/avatar";
     public static final String CHANGE_PASSWORD = "/users/change-password";
     public static final String ADDRESSES = "/users/addresses";
+
+    // Categories
+    public static final String CATEGORIES = "/categories";
+    public static final String CATEGORY_BY_SLUG = "/categories/{slug}";
+
 }

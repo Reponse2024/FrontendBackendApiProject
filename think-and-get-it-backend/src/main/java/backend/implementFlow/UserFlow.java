@@ -58,8 +58,9 @@ public class UserFlow {
     }
 
     public Response getAddresses(RequestSpecification requestSpec) {
+        AuthFlow authFlow = new AuthFlow();
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + authFlow.login(requestSpec))
                 .when()
                 .get(ApiEndpoints.ADDRESSES)
                 .then().log().all()

@@ -5,20 +5,21 @@ import backend.constants.ResponseMessages;
 import backend.constants.ResponsePaths;
 import backend.implementFlow.AuthFlow;
 import base.BaseTest;
-
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class RefreshTest extends BaseTest {
+public class ResetPasswordTest extends BaseTest {
 
     @Test
-    public void refreshToken() {
-        Response response = new AuthFlow().getRefreshedToken(requestSpec);
+    public void resetPassword() {
+        Response response = new AuthFlow().resetPassword(requestSpec);
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());
         Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
-        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ResponseMessages.REFRESH_SUCCESS);
-        Assert.assertNotNull(response.jsonPath().getString(ResponsePaths.TOKEN));
+        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ResponseMessages.PASSWORD_RESET_SUCCESS);
     }
+
+
 }
+

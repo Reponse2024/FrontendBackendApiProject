@@ -1,24 +1,25 @@
 package auth;
 
+import backend.configManager.ConfigManager;
 import backend.constants.HttpStatus;
 import backend.constants.ResponseMessages;
 import backend.constants.ResponsePaths;
 import backend.implementFlow.AuthFlow;
 import base.BaseTest;
-
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class RefreshTest extends BaseTest {
+public class MeTest extends BaseTest {
 
     @Test
-    public void refreshToken() {
-        Response response = new AuthFlow().getRefreshedToken(requestSpec);
+    public void getCurrentUser() {
+        Response response = new AuthFlow().getCurrentUser(requestSpec);
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());
+        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ResponseMessages.ME_SUCCESS);
         Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
-        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ResponseMessages.REFRESH_SUCCESS);
-        Assert.assertNotNull(response.jsonPath().getString(ResponsePaths.TOKEN));
+        Assert.assertNotNull(response.jsonPath().getString(ResponsePaths.USER_EMAIL));
     }
+
 }

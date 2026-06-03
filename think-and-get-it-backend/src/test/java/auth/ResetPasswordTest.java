@@ -1,6 +1,8 @@
 package auth;
 
 import backend.constants.HttpStatus;
+import backend.constants.ResponseMessages;
+import backend.constants.ResponsePaths;
 import backend.implementFlow.AuthFlow;
 import base.BaseTest;
 import io.restassured.response.Response;
@@ -14,8 +16,10 @@ public class ResetPasswordTest extends BaseTest {
         Response response = new AuthFlow().resetPassword(requestSpec);
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());
-        Assert.assertTrue(response.jsonPath().getBoolean("success"));
-        Assert.assertEquals(response.jsonPath().getString("message"), "Password reset successful");
+        Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
+        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ResponseMessages.PASSWORD_RESET_SUCCESS);
     }
+
+
 }
 

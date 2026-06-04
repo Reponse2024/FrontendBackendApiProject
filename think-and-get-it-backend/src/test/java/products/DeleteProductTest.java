@@ -7,6 +7,7 @@ import backend.implementFlow.ProductFlow;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.ResponseAssertions;
 
 import static spec.SpecBuilder.getRequestSpec;
 
@@ -14,10 +15,8 @@ public class DeleteProductTest {
     @Test
     public void deleteProduct() {
         Response response = new ProductFlow().deleteProduct(getRequestSpec());
-
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());
-        Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
-        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ProductResponseMessages.PRODUCT_DELETED);
+        ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ProductResponseMessages.PRODUCT_DELETED);
     }
+
 
 }

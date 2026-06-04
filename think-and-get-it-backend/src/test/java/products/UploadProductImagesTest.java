@@ -1,12 +1,11 @@
 package products;
 
 import backend.constants.HttpStatus;
-import backend.constants.ResponsePaths;
 import backend.constants.productsConstants.ProductResponseMessages;
 import backend.implementFlow.ProductFlow;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.ResponseAssertions;
 
 import static spec.SpecBuilder.getRequestSpec;
 
@@ -14,10 +13,8 @@ public class UploadProductImagesTest {
     @Test
     public void uploadProductImages() {
         Response response = new ProductFlow().uploadProductImages(getRequestSpec());
-
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.CREATED.code());
-        Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
-        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ProductResponseMessages.IMAGES_UPLOADED);
+        ResponseAssertions.assertSuccess(response, HttpStatus.CREATED.code(), ProductResponseMessages.IMAGES_UPLOADED);
     }
+
 
 }

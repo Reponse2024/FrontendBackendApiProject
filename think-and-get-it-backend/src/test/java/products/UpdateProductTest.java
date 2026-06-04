@@ -7,6 +7,7 @@ import backend.implementFlow.ProductFlow;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.ResponseAssertions;
 
 import static spec.SpecBuilder.getRequestSpec;
 
@@ -14,10 +15,8 @@ public class UpdateProductTest {
     @Test
     public void updateProduct() {
         Response response = new ProductFlow().updateProduct(getRequestSpec());
-
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());
-        Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
-        Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), ProductResponseMessages.PRODUCT_UPDATED);
+        ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ProductResponseMessages.PRODUCT_UPDATED);
     }
+
 
 }

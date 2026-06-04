@@ -2,44 +2,15 @@ name: FrontendBackendApiProject CI
 
 on:
   push:
-    branches: [ ft/login, ft/register, ft/navigation ]
+    branches: [ main ]
   pull_request:
-    branches: [ ft/login, ft/register, ft/navigation ]
+    branches: [ main ]
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
 
 jobs:
-  frontend-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven
-
-      - name: Run Playwright frontend tests
-        run: mvn test -pl think-and-get-it-frontend -Dheadless=true
-
-      - name: Upload frontend test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-test-reports
-          path: think-and-get-it-frontend/target/surefire-reports/
-
-#  backend-tests:
+#  frontend-tests:
 #    runs-on: ubuntu-latest
 #    steps:
 #      - name: Checkout repository
@@ -58,12 +29,41 @@ jobs:
 #          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 #          restore-keys: ${{ runner.os }}-maven
 #
-#      - name: Run Rest Assured backend tests
-#        run: mvn test -pl think-and-get-it-backend
+#      - name: Run Playwright frontend tests
+#        run: mvn test -pl think-and-get-it-frontend -Dheadless=true
 #
-#      - name: Upload backend test reports
+#      - name: Upload frontend test reports
 #        if: always()
 #        uses: actions/upload-artifact@v4
 #        with:
-#          name: backend-test-reports
-#          path: think-and-get-it-backend/target/surefire-reports/
+#          name: frontend-test-reports
+#          path: think-and-get-it-frontend/target/surefire-reports/
+
+  backend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Run Rest Assured backend tests
+        run: mvn test -pl think-and-get-it-backend
+
+      - name: Upload backend test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-reports
+          path: think-and-get-it-backend/target/surefire-reports/

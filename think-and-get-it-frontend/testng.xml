@@ -4,7 +4,13 @@
 <suite name="Frontend Suite" verbose="1" parallel="false">
     <test name="Frontend Tests">
         <packages>
-            <package name="tests"/>
+            <package name="tests.addToCart"/>
+            <package name="tests.checkout"/>
+            <package name="tests.Filter"/>
+            <package name="tests.login"/>
+            <package name="tests.navigation"/>
+            <package name="tests.register"/>
+            <package name="tests.sorting"/>
         </packages>
     </test>
 </suite>

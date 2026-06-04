@@ -2,9 +2,9 @@ name: FrontendBackendApiProject CI
 
 on:
   push:
-    branches: [ ft/login, ft/register, ft/navigation ]
+    branches: [ main ]
   pull_request:
-    branches: [ ft/login, ft/register, ft/navigation ]
+    branches: [ main ]
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"

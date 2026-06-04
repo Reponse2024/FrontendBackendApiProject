@@ -18,5 +18,4 @@ public class GetTrendingProductsTest {
         ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ProductResponseMessages.MESSAGE);
     }
 
-
 }

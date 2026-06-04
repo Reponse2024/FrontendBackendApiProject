@@ -1,20 +1,19 @@
 package auth;
 
 import backend.constants.HttpStatus;
-import backend.constants.ResponseMessages;
 import backend.constants.ResponsePaths;
+import backend.constants.ResponseMessages;
 import backend.implementFlow.AuthFlow;
-import base.BaseTest;
-
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import static spec.SpecBuilder.getRequestSpec;
 
-public class RefreshTest extends BaseTest {
+public class RefreshTest {
 
     @Test
     public void refreshToken() {
-        Response response = new AuthFlow().getRefreshedToken(requestSpec);
+        Response response = new AuthFlow().getRefreshedToken(getRequestSpec());
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());
         Assert.assertTrue(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));

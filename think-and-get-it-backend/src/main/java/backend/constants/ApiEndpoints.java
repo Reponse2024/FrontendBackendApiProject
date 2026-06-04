@@ -20,4 +20,14 @@ public class ApiEndpoints {
     public static final String CATEGORIES = "/categories";
     public static final String CATEGORY_BY_SLUG = "/categories/{slug}";
 
+    // Products
+    public static final String PRODUCTS = "/products";
+    public static final String PRODUCT_BY_SLUG = "/products/{slug}";
+    public static final String PRODUCT_BY_ID = "/products/{id}";
+    public static final String PRODUCT_IMAGES = "/products/{id}/images";
+    public static final String PRODUCT_TRENDING = "/products/trending";
+    public static final String PRODUCT_FLASH_SALES = "/products/flash-sales";
+    public static final String PRODUCT_RELATED = "/products/{id}/related";
+
+
 }

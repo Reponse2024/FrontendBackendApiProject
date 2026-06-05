@@ -14,8 +14,6 @@ public class GetAddressesTest {
 
     @Test
     public void getAddresses() {
-        System.out.println(TokenManager.getAuthToken());
-
         Response response = new UserFlow().getAddresses(getRequestSpec());
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK.code());

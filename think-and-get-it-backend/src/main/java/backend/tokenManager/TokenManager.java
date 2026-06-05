@@ -17,8 +17,8 @@ public class TokenManager {
                 .contentType(ContentType.JSON)
                 .body(
                         new java.util.HashMap<String, Object>() {{
-                            put("email", ConfigManager.get("adminEmail"));
-                            put("password", ConfigManager.get("adminPassword"));
+                            put("email", ConfigManager.get("email"));
+                            put("password", ConfigManager.get("password"));
                         }}
                 )
                 .post(ApiEndpoints.LOGIN)

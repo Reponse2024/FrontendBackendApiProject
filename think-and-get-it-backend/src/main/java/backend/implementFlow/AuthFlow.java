@@ -2,7 +2,9 @@ package backend.implementFlow;
 
 import backend.configManager.ConfigManager;
 import backend.constants.ApiEndpoints;
-import backend.constants.UserData;
+import backend.constants.AuthData;
+import backend.tokenManager.TokenManager;
+import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -14,10 +16,12 @@ import static io.restassured.RestAssured.given;
 
 public class AuthFlow {
 
+    private final Faker faker = new Faker();
+
     public Response login(RequestSpecification requestSpec){
         Map<String, Object> payload = new HashMap<>();
-        payload.put("email", UserData.EXISTING_USER_EMAIL);
-        payload.put("password", UserData.EXISTING_USER_PASSWORD);
+        payload.put("email", ConfigManager.get("email"));
+        payload.put("password", ConfigManager.get("password"));
 
         return given().spec(requestSpec)
                 .contentType(ContentType.JSON)
@@ -29,10 +33,10 @@ public class AuthFlow {
 
     public Response register(RequestSpecification requestSpec) {
         Map<String, Object> payload = new HashMap<>();
-        payload.put("email", UserData.NEW_USER_EMAIL);
-        payload.put("password", UserData.NEW_USER_PASSWORD);
-        payload.put("firstName", UserData.NEW_USER_FIRST_NAME);
-        payload.put("lastName", UserData.NEW_USER_LAST_NAME);
+        payload.put("email", faker.internet().emailAddress());
+        payload.put("password", faker.internet().password(8, 16));
+        payload.put("firstName", faker.name().firstName());
+        payload.put("lastName", faker.name().lastName());
 
         return given().spec(requestSpec)
                 .contentType(ContentType.JSON)
@@ -54,7 +58,7 @@ public class AuthFlow {
 
     public Response forgotPassword(RequestSpecification requestSpec) {
         Map<String, Object> payload = new HashMap<>();
-        payload.put("email", UserData.EXISTING_USER_EMAIL);
+        payload.put("email", ConfigManager.get("email"));
 
         return given().spec(requestSpec)
                 .contentType(ContentType.JSON)
@@ -75,24 +79,26 @@ public class AuthFlow {
     }
 
     public Response verifyEmail(RequestSpecification requestSpec) {
-        String verificationToken = register(requestSpec).jsonPath().getString("data.verificationToken");
+        String verificationToken = register(requestSpec).jsonPath().getString("data.token");
 
         return given().spec(requestSpec)
-                .get(ApiEndpoints.VERIFY_EMAIL + "/" + verificationToken)
+                .pathParam("token", verificationToken)
+                .get(ApiEndpoints.VERIFY_EMAIL)
                 .then().log().all()
                 .extract().response();
     }
 
     public Response resetPassword(RequestSpecification requestSpec) {
-        String resetToken = forgotPassword(requestSpec).jsonPath().getString("data.resetToken");
-
+        String resetToken = login(requestSpec).jsonPath().getString("data.token");
         Map<String, Object> payload = new HashMap<>();
-        payload.put("password", UserData.NEW_USER_PASSWORD);
+        payload.put("currentPassword", ConfigManager.get("password"));
+        payload.put("newPassword", faker.internet().password(8, 16));
 
         return given().spec(requestSpec)
                 .contentType(ContentType.JSON)
+                .pathParam("token", resetToken)
                 .body(payload)
-                .post(ApiEndpoints.RESET_PASSWORD + "/" + resetToken)
+                .post(ApiEndpoints.RESET_PASSWORD)
                 .then().log().all()
                 .extract().response();
     }

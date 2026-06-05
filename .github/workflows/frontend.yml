@@ -34,7 +34,7 @@ jobs:
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
       - name: Run Playwright frontend tests
-        run: mvn test -pl think-and-get-it-frontend -Dheadless=true
+        run: xvfb-run mvn test -pl think-and-get-it-frontend
 
       - name: Upload frontend test reports
         if: always()

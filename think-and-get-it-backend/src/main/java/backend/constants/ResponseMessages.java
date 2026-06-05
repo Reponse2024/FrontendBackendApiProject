@@ -9,4 +9,5 @@ public class ResponseMessages {
     public static final String PASSWORD_RESET_SUCCESS = "Password reset successful";
     public static final String PASSWORD_RESET_FAIL = "Invalid or expired reset token";
     public static final String ME_SUCCESS = "Success";
+    public static final String VERIFY_EMAIL_FAIL = "Invalid or expired verification token";
 }

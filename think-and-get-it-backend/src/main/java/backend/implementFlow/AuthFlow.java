@@ -83,13 +83,23 @@ public class AuthFlow {
 
         return given().spec(requestSpec)
                 .pathParam("token", verificationToken)
+                .header("Authorization", "Bearer " + verificationToken)
+                .get(ApiEndpoints.VERIFY_EMAIL)
+                .then().log().all()
+                .extract().response();
+    }
+    public Response verifyEmailWithInvalidToken(RequestSpecification requestSpec,  String token) {
+        return given().spec(requestSpec)
+                .pathParam("token", token)
                 .get(ApiEndpoints.VERIFY_EMAIL)
                 .then().log().all()
                 .extract().response();
     }
 
     public Response resetPassword(RequestSpecification requestSpec) {
+
         String resetToken = login(requestSpec).jsonPath().getString("data.token");
+
         Map<String, Object> payload = new HashMap<>();
         payload.put("currentPassword", ConfigManager.get("password"));
         payload.put("newPassword", faker.internet().password(8, 16));

@@ -17,8 +17,12 @@ public class CartFlow {
 
     private final Faker faker = new Faker();
 
+    public String getToken(RequestSpecification requestSpec) {
+        return new AuthFlow().login(requestSpec).jsonPath().getString("data.token");
+    }
+
     public Response getCart(RequestSpecification requestSpec) {
-        String token= new AuthFlow().login(requestSpec).jsonPath().getString("data.token");
+        String token= getToken(requestSpec);
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .when()
@@ -28,7 +32,7 @@ public class CartFlow {
     }
 
     public Response clearCart(RequestSpecification requestSpec) {
-        String token = new AuthFlow().login(requestSpec).jsonPath().getString("data.token");
+        String token= getToken(requestSpec);
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .delete(ApiEndpoints.CART)
@@ -37,7 +41,7 @@ public class CartFlow {
     }
 
     public Response addItemToCart(RequestSpecification requestSpec) {
-        String token = new AuthFlow().login(requestSpec).jsonPath().getString("data.token");
+        String token= getToken(requestSpec);
         Map<String, Object> payload = new HashMap<>();
         payload.put("productId", CartTestData.PRODUCT_ID);
         payload.put("variantId", CartTestData.VARIANT_ID);
@@ -51,11 +55,6 @@ public class CartFlow {
                 .post(ApiEndpoints.CART_ITEMS)
                 .then().log().all()
                 .extract().response();
-    }
-
-    public String addItemAndGetId(RequestSpecification requestSpec) {
-        Response response = addItemToCart(requestSpec);
-        return response.jsonPath().getString("data.itemId");
     }
 
     public Response updateItemQuantity(RequestSpecification requestSpec, String itemId, int quantity) {
@@ -87,9 +86,7 @@ public class CartFlow {
                 .extract().response();
     }
     public String getCouponCode(RequestSpecification requestSpec) {
-        String token = new AuthFlow().login(requestSpec)
-                .jsonPath().getString("data.token");
-
+        String token= getToken(requestSpec);
         Response response = given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .get(ApiEndpoints.CART)
@@ -100,7 +97,7 @@ public class CartFlow {
     }
 
     public Response applyCoupon(RequestSpecification requestSpec, String code) {
-        String token = new AuthFlow().login(requestSpec).jsonPath().getString("data.token");
+        String token= getToken(requestSpec);
         Map<String, Object> payload = new HashMap<>();
         payload.put("code", code);
 
@@ -114,28 +111,13 @@ public class CartFlow {
                 .extract().response();
     }
     public String getFirstItemId(RequestSpecification requestSpec) {
-        String token = new AuthFlow().login(requestSpec)
-                .jsonPath().getString("data.token");
-
+        String token= getToken(requestSpec);
         Response response = given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .get(ApiEndpoints.CART)
                 .then().log().all()
                 .extract().response();
         return response.jsonPath().getString("data.items[0].id");
-    }
-
-    public String getFirstVariantId(RequestSpecification requestSpec) {
-        String token = new AuthFlow().login(requestSpec)
-                .jsonPath().getString("data.token");
-
-        Response response = given().spec(requestSpec)
-                .header("Authorization", "Bearer " + token)
-                .get(ApiEndpoints.CART)
-                .then().log().all()
-                .extract().response();
-
-        return response.jsonPath().getString("data.items[0].variant.id");
     }
 
 

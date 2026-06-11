@@ -5,7 +5,10 @@ public class ResponsePaths {
     public static final String USER_LAST_NAME = "data.user.lastName";
     public static final String USER_EMAIL = "data.user.email";
     public static final String TOKEN = "data.token";
-    public static final String REFRESH_TOKEN = "data.refreshToken";
     public static final String MESSAGE = "message";
     public static final String SUCCESS = "success";
+
+    // Cart-specific response fields
+    public static final String CART_ITEMS = "data.items";
+    public static final String CART_TOTALS = "data.totals";
 }

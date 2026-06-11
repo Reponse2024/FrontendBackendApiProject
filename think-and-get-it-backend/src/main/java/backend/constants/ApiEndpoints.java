@@ -29,5 +29,11 @@ public class ApiEndpoints {
     public static final String PRODUCT_FLASH_SALES = "/products/flash-sales";
     public static final String PRODUCT_RELATED = "/products/{id}/related";
 
+    //Cart
+    public static final String CART = "/cart";
+    public static final String CART_ITEMS = "/cart/items";
+    public static final String CART_ITEM_BY_ID = "/cart/items/{itemId}";
+    public static final String CART_SAVE_FOR_LATER = "/cart/items/{itemId}/save-for-later";
+    public static final String CART_COUPON = "/cart/coupon";
+    }
 
-}

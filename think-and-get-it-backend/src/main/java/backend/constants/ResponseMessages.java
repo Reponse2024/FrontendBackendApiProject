@@ -36,4 +36,8 @@ public class ResponseMessages {
     public static final String FILE_REQUIRED = "File required";
     public static final String CART_EMPTY = "Your cart is empty";
 
+    //Reviews
+    public static final String RECORD_NOT_FOUND = "Related record not found";
+    public static final String REVIEW_SUBMITTED = "Review submitted";
+
 }

@@ -44,5 +44,8 @@ public class ApiEndpoints {
     public static final String ORDER_PAYMENT_PROOF = "/orders/{id}/payment-proof";
     public static final String ORDER_ADMIN_ALL = "/orders/admin/all";
     public static final String ORDER_ADMIN_STATUS = "/orders/admin/{id}/status";
+
+    //Reviews
+    public static final String REVIEWS = "/reviews/{productId}";
     }
 

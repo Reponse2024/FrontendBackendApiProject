@@ -100,9 +100,15 @@ public class OrderFlow {
 
     public Response returnOrder(RequestSpecification requestSpec) {
         String orderId = ensureOrderExists(requestSpec);
+        if (orderId == null) {
+            throw new IllegalStateException("No order available to return");
+        }
+
         String token = TokenManager.getAuthToken(requestSpec);
+
         Map<String, Object> payload = new HashMap<>();
-        payload.put("reason", "Received damaged item");
+        payload.put("reason", OrderStatusConstants.DEFAULT_RETURN_REASON);
+
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("id", orderId)
@@ -111,6 +117,7 @@ public class OrderFlow {
                 .patch(ApiEndpoints.ORDER_RETURN)
                 .then().extract().response();
     }
+
 
     public Response returnOrderWithoutReason(RequestSpecification requestSpec) {
         String orderId = ensureOrderExists(requestSpec);

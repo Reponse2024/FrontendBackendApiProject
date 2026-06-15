@@ -9,8 +9,9 @@ public class OrderStatusConstants {
     public static final String CANCELLED = "CANCELLED";
 
     public static final String DELIVERED_MESSAGE = "Order delivered successfully";
-    public static final String CONFIRMED_MESSAGE = "Order confirmed successfully";
     public static final String TRACKING_NUMBER_VALID = "TRACK987654";
     public static final String TRACKING_NUMBER_INVALID = "TRACK000";
     public static final String INVALID_STATUS = "Invalid Status";
+    public static final String DEFAULT_RETURN_REASON = "No longer needed";
+
 }

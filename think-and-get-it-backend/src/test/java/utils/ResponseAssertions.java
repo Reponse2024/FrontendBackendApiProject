@@ -1,5 +1,6 @@
 package utils;
 
+import backend.constants.HttpStatus;
 import backend.constants.ResponsePaths;
 import io.restassured.response.Response;
 import org.testng.Assert;

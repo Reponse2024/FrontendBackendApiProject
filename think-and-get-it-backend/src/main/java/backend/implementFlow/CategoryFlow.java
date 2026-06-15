@@ -29,7 +29,7 @@ public class CategoryFlow {
         );
 
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + TokenManager.getAuthToken(requestSpec))
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .post(ApiEndpoints.CATEGORIES)

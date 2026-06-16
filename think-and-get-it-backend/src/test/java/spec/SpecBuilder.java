@@ -25,4 +25,12 @@ public class SpecBuilder {
                 .expectBody("success", equalTo(true))
                 .build();
     }
+
+    public static RequestSpecification getMultipartSpec(){
+        return new RequestSpecBuilder()
+                .setBaseUri(ConfigManager.get("baseUrl"))
+                .setContentType(ContentType.MULTIPART)
+                .log(LogDetail.URI)
+                .build();
+}
 }

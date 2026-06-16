@@ -30,6 +30,18 @@ public class AuthFlow {
                 .then().log().all()
                 .extract().response();
     }
+    public Response loginAsAdmin(RequestSpecification requestSpec) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("email", ConfigManager.get("adminEmail"));
+        payload.put("password", ConfigManager.get("adminPassword"));
+
+        return given().spec(requestSpec)
+                .contentType(ContentType.JSON)
+                .body(payload)
+                .post(ApiEndpoints.LOGIN)
+                .then().log().all()
+                .extract().response();
+    }
 
     public Response register(RequestSpecification requestSpec) {
         Map<String, Object> payload = new HashMap<>();

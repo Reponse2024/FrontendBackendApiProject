@@ -28,7 +28,7 @@ public class RequestHelper {
 
     public static Response postWithAuth(RequestSpecification spec, String endpoint, Object body) {
         return given().spec(spec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + TokenManager.getAuthToken(spec))
                 .contentType(ContentType.JSON)
                 .body(body)
                 .post(endpoint)
@@ -38,7 +38,7 @@ public class RequestHelper {
 
     public static Response putWithAuth(RequestSpecification spec, String endpoint, String key, String value, Object body) {
         return given().spec(spec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + TokenManager.getAuthToken(spec))
                 .contentType(ContentType.JSON)
                 .pathParam(key, value)
                 .body(body)
@@ -49,7 +49,7 @@ public class RequestHelper {
 
     public static Response deleteWithAuth(RequestSpecification spec, String endpoint, String key, String value) {
         return given().spec(spec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + TokenManager.getAuthToken(spec))
                 .pathParam(key, value)
                 .delete(endpoint)
                 .then().log().all()
@@ -58,7 +58,7 @@ public class RequestHelper {
 
     public static Response uploadImage(RequestSpecification spec, String endpoint, String key, String value, File image) {
         return given().spec(spec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + TokenManager.getAuthToken(spec))
                 .multiPart("images", image)
                 .pathParam(key, value)
                 .post(endpoint)

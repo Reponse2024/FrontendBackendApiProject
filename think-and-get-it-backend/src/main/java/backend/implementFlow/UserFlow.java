@@ -13,6 +13,7 @@ import static io.restassured.RestAssured.given;
 public class UserFlow {
 
     public Response updateProfile(RequestSpecification requestSpec) {
+        String token = TokenManager.getAuthToken(requestSpec);
         Map<String, Object> payload = Map.of(
                 "firstName", UsersData.PROFILE_FIRST_NAME,
                 "lastName", UsersData.PROFILE_LAST_NAME,
@@ -20,7 +21,7 @@ public class UserFlow {
         );
 
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer "+ TokenManager.getAuthToken())
+                .header("Authorization", "Bearer "+ token)
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .when()
@@ -29,11 +30,10 @@ public class UserFlow {
                 .extract().response();
     }
 
-    public Response uploadAvatar(RequestSpecification requestSpec) {
-        File avatarFile = new File("src/test/resources/avatar.jpg");
-
+    public Response uploadAvatar(RequestSpecification requestSpec, File avatarFile) {
+        String token = TokenManager.getAuthToken(requestSpec);
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + token)
                 .multiPart("avatar", avatarFile)
                 .when()
                 .post(ApiEndpoints.AVATAR)
@@ -42,13 +42,14 @@ public class UserFlow {
     }
 
     public Response changePassword(RequestSpecification requestSpec, String currentPassword, String newPassword) {
+        String token = TokenManager.getAuthToken(requestSpec);
         Map<String, Object> payload = Map.of(
                 "currentPassword", currentPassword,
                 "newPassword", newPassword
         );
 
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + token)
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .when()
@@ -58,8 +59,9 @@ public class UserFlow {
     }
 
     public Response getAddresses(RequestSpecification requestSpec) {
+        String token = TokenManager.getAuthToken(requestSpec);
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + token)
                 .when()
                 .get(ApiEndpoints.ADDRESSES)
                 .then().log().all()
@@ -67,6 +69,7 @@ public class UserFlow {
     }
 
     public Response addAddress(RequestSpecification requestSpec) {
+        String token = TokenManager.getAuthToken(requestSpec);
         Map<String, Object> payload = Map.of(
                 "label", UsersData.ADDRESS_LABEL,
                 "firstName", UsersData.PROFILE_FIRST_NAME,
@@ -81,7 +84,7 @@ public class UserFlow {
         );
 
         return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken())
+                .header("Authorization", "Bearer " + token)
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .when()

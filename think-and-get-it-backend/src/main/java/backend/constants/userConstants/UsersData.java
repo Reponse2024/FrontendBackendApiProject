@@ -11,4 +11,9 @@ public class UsersData {
     public static final String ADDRESS_STATE = "Gasabo";
     public static final String ADDRESS_COUNTRY = "Rwanda";
     public static final String ADDRESS_POSTAL_CODE = "250";
+    //password
+    public static final String CURRENT_PASSWORD= "NewPassword123!";
+    public static final String NEW_PASSWORD= "NewPassword1234!";
+
+
 }

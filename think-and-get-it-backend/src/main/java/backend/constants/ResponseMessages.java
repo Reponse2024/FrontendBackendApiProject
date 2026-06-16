@@ -20,6 +20,24 @@ public class ResponseMessages {
     public static final String ITEM_SAVED_FOR_LATER = "Saved for later";
     public static final String COUPON_APPLIED = "Coupon applied successfully";
     public static final String COUPON_INVALID = "Invalid or expired coupon code";
+            //Expected Messages
     public static final String ITEM_ID_SHOULD_NOT_BE_NULL = "Item ID should not be null";
     public static final String NO_COUPON_AVAILABLE = "No coupon code available in cart to apply.";
+
+    // Orders messages
+    public static final String ORDER_PLACED = "Order placed successfully";
+    public static final String ORDER_CANCELLED = "Order cancelled";
+    public static final String ORDER_RETURN_REQUESTED = "Return requested";
+    public static final String PAYMENT_PROOF_UPLOADED = "Payment proof uploaded";
+    public static final String ORDER_STATUS_UPDATED = "Order status updated";
+    public static final String ORDER_NOT_FOUND = "Order not found";
+    public static final String REASON_REQUIRED = "Reason required";
+    public static final String ORDER_ALREADY_CANCELLED = "Order already cancelled";
+    public static final String FILE_REQUIRED = "File required";
+    public static final String CART_EMPTY = "Your cart is empty";
+
+    //Reviews
+    public static final String RECORD_NOT_FOUND = "Related record not found";
+    public static final String REVIEW_SUBMITTED = "Review submitted";
+
 }

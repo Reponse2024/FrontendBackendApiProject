@@ -35,5 +35,17 @@ public class ApiEndpoints {
     public static final String CART_ITEM_BY_ID = "/cart/items/{itemId}";
     public static final String CART_SAVE_FOR_LATER = "/cart/items/{itemId}/save-for-later";
     public static final String CART_COUPON = "/cart/coupon";
+
+    //Orders
+    public static final String ORDERS = "/orders";
+    public static final String ORDER_BY_ID = "/orders/{id}";
+    public static final String ORDER_CANCEL = "/orders/{id}/cancel";
+    public static final String ORDER_RETURN = "/orders/{id}/return";
+    public static final String ORDER_PAYMENT_PROOF = "/orders/{id}/payment-proof";
+    public static final String ORDER_ADMIN_ALL = "/orders/admin/all";
+    public static final String ORDER_ADMIN_STATUS = "/orders/admin/{id}/status";
+
+    //Reviews
+    public static final String REVIEWS = "/reviews/{productId}";
     }
 

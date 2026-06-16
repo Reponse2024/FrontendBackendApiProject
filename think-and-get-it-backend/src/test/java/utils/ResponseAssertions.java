@@ -18,8 +18,4 @@ public class ResponseAssertions {
         Assert.assertFalse(response.jsonPath().getBoolean(ResponsePaths.SUCCESS));
         Assert.assertEquals(response.jsonPath().getString(ResponsePaths.MESSAGE), expectedMessage);
     }
-    //Assertions specific for the Cart
-    public static void assertPresence(Response response, String path) {
-        Assert.assertNotNull(response.jsonPath().getString(path));
-        }
     }

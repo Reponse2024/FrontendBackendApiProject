@@ -47,5 +47,10 @@ public class ApiEndpoints {
 
     //Reviews
     public static final String REVIEWS = "/reviews/{productId}";
+
+    //Wishlist
+    public static final String WISHLIST = "/wishlist";
+    public static final String WISHLIST_PRODUCT = "/wishlist/{productId}";
+    public static final String WISHLIST_MOVE_TO_CART = "/wishlist/{productId}/move-to-cart";
     }
 

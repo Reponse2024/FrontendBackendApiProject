@@ -40,4 +40,13 @@ public class ResponseMessages {
     public static final String RECORD_NOT_FOUND = "Related record not found";
     public static final String REVIEW_SUBMITTED = "Review submitted";
 
+    //Wishlist
+    public static final String WISHLIST_FETCHED = "Success";
+    public static final String WISHLIST_ADDED = "Added to wishlist";
+    public static final String WISHLIST_ALREADY_EXISTS = "Already in wishlist";
+    public static final String WISHLIST_REMOVED = "Removed from wishlist";
+    public static final String WISHLIST_MOVED_TO_CART = "Wishlist item moved to cart successfully";
+    public static final String INTERNAL_ERROR = "Internal Server Error";
+
+
 }

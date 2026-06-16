@@ -2,6 +2,7 @@ package backend.implementFlow;
 
 import backend.constants.ApiEndpoints;
 import backend.constants.productsConstants.ProductData;
+import backend.tokenManager.TokenManager;
 import backend.utils.RequestHelper;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class ProductFlow {
 
     public Response getAllProducts(RequestSpecification spec) {
+
         return RequestHelper.get(spec, ApiEndpoints.PRODUCTS);
     }
 

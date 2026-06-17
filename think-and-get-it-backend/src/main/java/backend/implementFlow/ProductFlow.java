@@ -36,7 +36,7 @@ public class ProductFlow {
     }
 
     public Response uploadProductImages(RequestSpecification spec) {
-        File image = new File("src/test/resources/product.jpg");
+        File image = new File("src/test/resources/img.png");
         return RequestHelper.uploadImage(spec, ApiEndpoints.PRODUCT_IMAGES, "id", ProductData.VALID_ID_SMARTPHONE, image);
     }
 

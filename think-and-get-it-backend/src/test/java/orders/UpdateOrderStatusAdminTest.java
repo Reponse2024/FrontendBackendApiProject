@@ -17,7 +17,7 @@ public class UpdateOrderStatusAdminTest {
         OrderFlow orderFlow = new OrderFlow();
         Response orderResponse = orderFlow.placeOrder(getRequestSpec());
         String orderId = orderResponse.jsonPath().getString("data.id");
-        Assert.assertNotNull(orderId, "Order ID should not be null");
+        Assert.assertNotNull(orderId, ResponseMessages.ORDER_ID_CAN_NOT_BE_NULL);
         Response updateResponse = orderFlow.updateOrderStatusAdmin(
                 getRequestSpec(),
                 orderId,

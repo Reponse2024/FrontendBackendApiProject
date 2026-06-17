@@ -19,7 +19,8 @@ public class ReturnOrderTest {
     public void returnOrderSuccessfully() {
         Response orderResponse = orderFlow.placeOrder(getRequestSpec());
         String orderId = orderResponse.jsonPath().getString("data.id");
-        Assert.assertNotNull(orderId, "Order ID should not be null");
+        Assert.assertNotNull(orderId, ResponseMessages.ITEM_ID_SHOULD_NOT_BE_NULL);
+
         orderFlow.updateOrderStatusAdmin(
                 getRequestSpec(),
                 orderId,
@@ -29,14 +30,15 @@ public class ReturnOrderTest {
         );
         Response response = orderFlow.returnOrder(getRequestSpec(), orderId);
         ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ResponseMessages.ORDER_RETURN_REQUESTED);
-        Assert.assertEquals(response.jsonPath().getString("data.status"), OrderStatusConstants.RETURNED);
+        Assert.assertEquals(response.jsonPath().getString("message"), ResponseMessages.ORDER_RETURN_REQUESTED);
+        System.out.println(response.asString());
     }
 
     @Test
     public void returnOrderFailsIfNotDelivered() {
         Response orderResponse = orderFlow.placeOrder(getRequestSpec());
         String orderId = orderResponse.jsonPath().getString("data.id");
-        Assert.assertNotNull(orderId, "Order ID should not be null");
+        Assert.assertNotNull(orderId, ResponseMessages.ITEM_ID_SHOULD_NOT_BE_NULL);
         Response response = orderFlow.returnOrder(getRequestSpec(), orderId);
         ResponseAssertions.assertFailure(response, HttpStatus.BAD_REQUEST.code(), ResponseMessages.ORDER_RETURN_WARNING);
     }

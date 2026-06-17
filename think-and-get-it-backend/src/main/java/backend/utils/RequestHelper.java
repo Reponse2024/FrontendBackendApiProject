@@ -28,7 +28,7 @@ public class RequestHelper {
 
     public static Response postWithAuth(RequestSpecification spec, String endpoint, Object body) {
         return given().spec(spec)
-                .header("Authorization", "Bearer " + TokenManager.getAuthToken(spec))
+                .header("Authorization", "Bearer " + TokenManager.getAdminAuthToken(spec))
                 .contentType(ContentType.JSON)
                 .body(body)
                 .post(endpoint)

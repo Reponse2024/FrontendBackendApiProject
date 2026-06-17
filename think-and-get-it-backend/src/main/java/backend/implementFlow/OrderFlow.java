@@ -15,7 +15,11 @@ public class OrderFlow {
 
     public String ensureOrderExists(RequestSpecification requestSpec) {
         Response orderResponse = placeOrder(requestSpec);
-        return orderResponse.jsonPath().getString("data.id");
+        String orderId = orderResponse.jsonPath().getString("data.id");
+        if (orderId == null) {
+            throw new IllegalStateException("Order could not be created. Check cart stock or address setup.");
+        }
+        return orderId;
     }
 
     public Response placeOrder(RequestSpecification requestSpec) {
@@ -87,10 +91,19 @@ public class OrderFlow {
                 .get(ApiEndpoints.ORDER_BY_ID)
                 .then().extract().response();
     }
-
-    public Response cancelOrder(RequestSpecification requestSpec) {
+    public Response cancelOrderNew(RequestSpecification requestSpec) {
         String orderId = ensureOrderExists(requestSpec);
         String token = TokenManager.getAuthToken(requestSpec);
+
+        return given().spec(requestSpec)
+                .header("Authorization", "Bearer " + token)
+                .pathParam("id", orderId)
+                .patch(ApiEndpoints.ORDER_CANCEL)
+                .then().extract().response();
+    }
+    public Response cancelOrder(RequestSpecification requestSpec, String orderId) {
+        String token = TokenManager.getAuthToken(requestSpec);
+
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("id", orderId)
@@ -98,41 +111,28 @@ public class OrderFlow {
                 .then().extract().response();
     }
 
-    public Response returnOrder(RequestSpecification requestSpec) {
-        String orderId = ensureOrderExists(requestSpec);
-        if (orderId == null) {
-            throw new IllegalStateException("No order available to return");
-        }
-
+    public Response returnOrder(RequestSpecification requestSpec, String orderId) {
         String token = TokenManager.getAuthToken(requestSpec);
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("reason", OrderStatusConstants.DEFAULT_RETURN_REASON);
 
-        return given().spec(requestSpec)
+        Response response = given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("id", orderId)
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .patch(ApiEndpoints.ORDER_RETURN)
                 .then().extract().response();
-    }
 
-
-    public Response returnOrderWithoutReason(RequestSpecification requestSpec) {
-        String orderId = ensureOrderExists(requestSpec);
-        String token = TokenManager.getAuthToken(requestSpec);
-        return given().spec(requestSpec)
-                .header("Authorization", "Bearer " + token)
-                .pathParam("id", orderId)
-                .patch(ApiEndpoints.ORDER_RETURN)
-                .then().extract().response();
+        System.out.println("Return Order Response: " + response.asString());
+        return response;
     }
 
     public Response uploadPaymentProof(RequestSpecification requestSpec) {
         String orderId = ensureOrderExists(requestSpec);
         String token = TokenManager.getAuthToken(requestSpec);
-        File proof = new File("src/test/resources/payment-proof.png");
+        File proof = new File("src/test/resources/payment-prooff.png");
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("id", orderId)
@@ -167,25 +167,26 @@ public class OrderFlow {
                 .then().extract().response();
     }
 
-    public Response updateOrderStatusAdmin(RequestSpecification requestSpec, String status, String message, String trackingNumber) {
-        String orderId = ensureOrderExists(requestSpec);
+    public Response updateOrderStatusAdmin(RequestSpecification requestSpec, String orderId, String status, String message, String trackingNumber) {
         String token = TokenManager.getAdminAuthToken(requestSpec);
+
         Map<String, Object> payload = new HashMap<>();
         payload.put("status", status);
         payload.put("message", message);
         payload.put("trackingNumber", trackingNumber);
-        return given().spec(requestSpec)
+
+        Response response = given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("id", orderId)
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .patch(ApiEndpoints.ORDER_ADMIN_STATUS)
                 .then().extract().response();
+
+        System.out.println("Update Order Status Response: " + response.asString());
+        return response;
     }
 
-    public Response updateOrderStatusAdminWithInvalidStatus(RequestSpecification requestSpec) {
-        return updateOrderStatusAdmin(requestSpec, OrderStatusConstants.INVALID_STATUS, "Trying invalid status", OrderStatusConstants.TRACKING_NUMBER_INVALID);
-    }
 
     public Response updateOrderStatusAdminWithoutAuth(RequestSpecification requestSpec) {
         return given().spec(requestSpec)

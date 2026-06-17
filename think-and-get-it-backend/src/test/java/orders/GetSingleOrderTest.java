@@ -1,15 +1,11 @@
 package orders;
 
-import backend.constants.ApiEndpoints;
 import backend.constants.HttpStatus;
 import backend.constants.ResponseMessages;
 import backend.implementFlow.OrderFlow;
-import backend.tokenManager.TokenManager;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import utils.ResponseAssertions;
-
-import static io.restassured.RestAssured.given;
 import static spec.SpecBuilder.getRequestSpec;
 
 public class GetSingleOrderTest {

@@ -23,7 +23,6 @@ public class ReviewFlow {
                 .get(ApiEndpoints.REVIEWS)
                 .then().extract().response();
     }
-
     public Response submitReview(RequestSpecification requestSpec, ReviewPayload review) {
         String token = TokenManager.getAuthToken(requestSpec);
 

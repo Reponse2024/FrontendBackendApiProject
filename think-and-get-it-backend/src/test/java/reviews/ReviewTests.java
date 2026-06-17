@@ -19,7 +19,6 @@ public class ReviewTests {
         Response response = reviewFlow.getReviews(SpecBuilder.getRequestSpec(), 1, "newest");
         ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ResponseMessages.ME_SUCCESS);
     }
-
     @Test
     public void submitReviewSuccessfully() {
         ReviewPayload review = new ReviewPayload(
@@ -31,7 +30,6 @@ public class ReviewTests {
         Response response = reviewFlow.submitReview(SpecBuilder.getRequestSpec(), review);
         ResponseAssertions.assertSuccess(response, HttpStatus.CREATED.code(), ResponseMessages.REVIEW_SUBMITTED);
     }
-
     @Test
     public void submitReviewFailsWithInvalidData() {
         ReviewPayload review = new ReviewPayload(0, "", "");

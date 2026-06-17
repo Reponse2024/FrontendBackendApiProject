@@ -8,6 +8,7 @@ public enum HttpStatus {
     FORBIDDEN(403, "You do not have permission for this action"),
     NOT_FOUND(404, "Resource not found"),
     INTERNAL_SERVER_ERROR(500, "Unexpected server error"),
+    CONFLICT(409, "Conflict - resource already exists"),
     SERVICE_UNAVAILABLE(503, "Service temporarily unavailable");
 
     private final int code;

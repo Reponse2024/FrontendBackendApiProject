@@ -20,7 +20,6 @@ public class CartFlow {
     public String getToken(RequestSpecification requestSpec) {
         return new AuthFlow().login(requestSpec).jsonPath().getString("data.token");
     }
-
     public Response getCart(RequestSpecification requestSpec) {
         String token= getToken(requestSpec);
         return given().spec(requestSpec)
@@ -30,7 +29,6 @@ public class CartFlow {
                 .then().log().all()
                 .extract().response();
     }
-
     public Response clearCart(RequestSpecification requestSpec) {
         String token= getToken(requestSpec);
         return given().spec(requestSpec)
@@ -39,7 +37,6 @@ public class CartFlow {
                 .then().log().all()
                 .extract().response();
     }
-
     public Response addItemToCart(RequestSpecification requestSpec) {
         String token= getToken(requestSpec);
         String productId = new DynamicProductFlow().getProductId(requestSpec);
@@ -59,7 +56,6 @@ public class CartFlow {
                 .then().log().all()
                 .extract().response();
     }
-
     public Response updateItemQuantity(RequestSpecification requestSpec, String itemId, int quantity) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("quantity", quantity);
@@ -72,7 +68,6 @@ public class CartFlow {
                 .then().log().all()
                 .extract().response();
     }
-
     public Response removeItemFromCart(RequestSpecification requestSpec, String itemId) {
         return given().spec(requestSpec)
                 .pathParam("itemId", itemId)
@@ -80,7 +75,6 @@ public class CartFlow {
                 .then().log().all()
                 .extract().response();
     }
-
     public Response saveItemForLater(RequestSpecification requestSpec, String itemId) {
         return given().spec(requestSpec)
                 .pathParam("itemId", itemId)

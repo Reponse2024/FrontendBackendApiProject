@@ -42,21 +42,17 @@ public class DynamicProductFlow {
                 .post(ApiEndpoints.PRODUCTS)
                 .then().extract().response();
     }
-
     public String getProductId(RequestSpecification requestSpec) {
         Response response = createProduct(requestSpec);
         String productId = response.jsonPath().getString("data.id");
-
         if (productId == null) {
             throw new IllegalStateException("Product ID is null — product creation failed.");
         }
         return productId;
     }
-
     public String getVariantId(RequestSpecification requestSpec) {
         Response response = createProduct(requestSpec);
         String variantId = response.jsonPath().getString("data.variants[0].id");
-
         if (variantId == null) {
             throw new IllegalStateException("Variant ID is null — product creation failed.");
         }

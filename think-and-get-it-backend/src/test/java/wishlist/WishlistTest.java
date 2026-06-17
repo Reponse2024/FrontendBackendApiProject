@@ -51,16 +51,21 @@ public class WishlistTest {
 
     @Test
     public void moveWishlistItemToCartSuccessfully() {
-        new WishlistFlow().addProductToWishlist(getRequestSpec());
-        Response response = new WishlistFlow().moveWishlistItemToCart(getRequestSpec());
+        WishlistFlow flow = new WishlistFlow();
+        Response addResponse = flow.addProductToWishlist(getRequestSpec());
+        String productId = addResponse.jsonPath().getString("data.id");
+        Response response = flow.moveWishlistItemToCart(getRequestSpec(), productId);
         ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ResponseMessages.WISHLIST_MOVED_TO_CART);
     }
 
     @Test
     public void moveWishlistItemToCartFailsIfNotInWishlist() {
-        new WishlistFlow().removeProductFromWishlist(getRequestSpec());
-        Response response = new WishlistFlow().moveWishlistItemToCart(getRequestSpec());
+        WishlistFlow flow = new WishlistFlow();
+        Response removeResponse = flow.removeProductFromWishlist(getRequestSpec());
+        String productId = removeResponse.jsonPath().getString("data.id");
+        Response response = flow.moveWishlistItemToCart(getRequestSpec(), productId);
         ResponseAssertions.assertFailure(response, HttpStatus.INTERNAL_SERVER_ERROR.code(), ResponseMessages.INTERNAL_ERROR);
     }
+
 
 }

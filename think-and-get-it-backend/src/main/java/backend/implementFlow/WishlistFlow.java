@@ -41,12 +41,11 @@ public class WishlistFlow {
                 .then().extract().response();
     }
 
-    public Response moveWishlistItemToCart(RequestSpecification requestSpec) {
+    public Response moveWishlistItemToCart(RequestSpecification requestSpec, String productId) {
         String token = TokenManager.getAuthToken(requestSpec);
-
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
-                .pathParam("productId", ReviewsTestData.DEFAULT_PRODUCT_ID)
+                .pathParam("productId", productId)
                 .contentType(ContentType.JSON)
                 .post(ApiEndpoints.WISHLIST_MOVE_TO_CART)
                 .then().extract().response();

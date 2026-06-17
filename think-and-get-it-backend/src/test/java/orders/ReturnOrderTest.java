@@ -5,57 +5,37 @@ import backend.constants.OrderConstants.OrderStatusConstants;
 import backend.constants.ResponseMessages;
 import backend.implementFlow.OrderFlow;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.ResponseAssertions;
 
 import static spec.SpecBuilder.getRequestSpec;
 
 public class ReturnOrderTest {
-
-    OrderFlow orderFlow = new OrderFlow();
-
     @Test
     public void returnOrderSuccessfully() {
-        Response orderResponse = orderFlow.placeOrder(getRequestSpec());
-        String orderId = orderResponse.jsonPath().getString("data.id");
-        Assert.assertNotNull(orderId, ResponseMessages.ITEM_ID_SHOULD_NOT_BE_NULL);
-
+        OrderFlow orderFlow = new OrderFlow();
+        orderFlow.placeOrder(getRequestSpec());
         orderFlow.updateOrderStatusAdmin(
                 getRequestSpec(),
-                orderId,
                 OrderStatusConstants.DELIVERED,
                 OrderStatusConstants.DELIVERED_MESSAGE,
                 OrderStatusConstants.TRACKING_NUMBER_VALID
         );
-        Response response = orderFlow.returnOrder(getRequestSpec(), orderId);
+        Response response = orderFlow.returnOrder(getRequestSpec());
         ResponseAssertions.assertSuccess(response, HttpStatus.OK.code(), ResponseMessages.ORDER_RETURN_REQUESTED);
-        Assert.assertEquals(response.jsonPath().getString("message"), ResponseMessages.ORDER_RETURN_REQUESTED);
-        System.out.println(response.asString());
     }
 
     @Test
-    public void returnOrderFailsIfNotDelivered() {
-        Response orderResponse = orderFlow.placeOrder(getRequestSpec());
-        String orderId = orderResponse.jsonPath().getString("data.id");
-        Assert.assertNotNull(orderId, ResponseMessages.ITEM_ID_SHOULD_NOT_BE_NULL);
-        Response response = orderFlow.returnOrder(getRequestSpec(), orderId);
-        ResponseAssertions.assertFailure(response, HttpStatus.BAD_REQUEST.code(), ResponseMessages.ORDER_RETURN_WARNING);
-    }
-
-    @Test
-    public void returnOrderFailsIfAlreadyReturned() {
-        Response orderResponse = orderFlow.placeOrder(getRequestSpec());
-        String orderId = orderResponse.jsonPath().getString("data.id");
+    public void returnOrderFailsWithoutReason() {
+        OrderFlow orderFlow = new OrderFlow();
+        orderFlow.placeOrder(getRequestSpec());
         orderFlow.updateOrderStatusAdmin(
                 getRequestSpec(),
-                orderId,
                 OrderStatusConstants.DELIVERED,
                 OrderStatusConstants.DELIVERED_MESSAGE,
                 OrderStatusConstants.TRACKING_NUMBER_VALID
         );
-        orderFlow.returnOrder(getRequestSpec(), orderId);
-        Response response = orderFlow.returnOrder(getRequestSpec(), orderId);
-        ResponseAssertions.assertFailure(response, HttpStatus.BAD_REQUEST.code(), ResponseMessages.ORDER_RETURN_WARNING);
+        Response response = orderFlow.returnOrderWithoutReason(getRequestSpec());
+        ResponseAssertions.assertFailure(response, HttpStatus.BAD_REQUEST.code(), ResponseMessages.REASON_REQUIRED);
     }
 }

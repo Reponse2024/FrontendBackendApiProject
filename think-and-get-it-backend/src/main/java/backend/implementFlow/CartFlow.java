@@ -42,12 +42,9 @@ public class CartFlow {
 
     public Response addItemToCart(RequestSpecification requestSpec) {
         String token= getToken(requestSpec);
-        String productId = new DynamicProductFlow().getProductId(requestSpec);
-        String variantId = new DynamicProductFlow().getVariantId(requestSpec);
-
         Map<String, Object> payload = new HashMap<>();
-        payload.put("productId", productId);
-        payload.put("variantId", variantId);
+        payload.put("productId", CartTestData.PRODUCT_ID);
+        payload.put("variantId", CartTestData.VARIANT_ID);
         payload.put("quantity", faker.number().numberBetween(1, 5));
 
         return given().spec(requestSpec)

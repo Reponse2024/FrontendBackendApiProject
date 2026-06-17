@@ -27,17 +27,14 @@ public class ResponseMessages {
     // Orders messages
     public static final String ORDER_PLACED = "Order placed successfully";
     public static final String ORDER_CANCELLED = "Order cancelled";
-    public static final String ORDER_RETURN_REQUESTED = "Return request submitted";
-    public static final String PAYMENT_PROOF_UPLOADED = "Payment proof uploaded. We will verify and confirm your order.";
+    public static final String ORDER_RETURN_REQUESTED = "Return requested";
+    public static final String PAYMENT_PROOF_UPLOADED = "Payment proof uploaded";
     public static final String ORDER_STATUS_UPDATED = "Order status updated";
     public static final String ORDER_NOT_FOUND = "Order not found";
-    public static final String ORDER_RETURN_WARNING = "Only delivered orders can be returned";
-    public static final String ORDER_ALREADY_CANCELLED = "Only pending or confirmed orders can be cancelled";
-    public static final String NO_FILE_UPLOADED = "No file uploaded";
+    public static final String REASON_REQUIRED = "Reason required";
+    public static final String ORDER_ALREADY_CANCELLED = "Order already cancelled";
+    public static final String FILE_REQUIRED = "File required";
     public static final String CART_EMPTY = "Your cart is empty";
-    public static final String STATUS_SHOULD_BE_DELIVERED = "Order status should be DELIVERED";
-    public static final String EXPECTED_200 = "Expected 200 OK";
-    public static final String ORDER_ID_CAN_NOT_BE_NULL = "Order ID can not be null";
 
     //Reviews
     public static final String RECORD_NOT_FOUND = "Related record not found";

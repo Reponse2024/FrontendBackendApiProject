@@ -20,7 +20,7 @@ public class ResponseMessages {
     public static final String ITEM_SAVED_FOR_LATER = "Saved for later";
     public static final String COUPON_APPLIED = "Coupon applied successfully";
     public static final String COUPON_INVALID = "Invalid or expired coupon code";
-            //Expected Messages
+    //Expected Messages
     public static final String ITEM_ID_SHOULD_NOT_BE_NULL = "Item ID should not be null";
     public static final String NO_COUPON_AVAILABLE = "No coupon code available in cart to apply.";
 
@@ -52,20 +52,14 @@ public class ResponseMessages {
     public static final String AT_LEAST_ONE_ITEM = "Wishlist should contain at least one product";
 
     //Search
-    public static final String SEARCH_TRENDING = "Trending searches fetched successfully";
     public static final String SEARCH_QUERY_REQUIRED = "Search query is required";
     public static final String SEARCH_NO_RESULTS = "No products found for the given query";
-    public static final String UNAUTHORIZED = "Unauthorized access";
 
     //Banners
-    public static final String BANNERS_FETCHED = "Active banners fetched successfully";
     public static final String BANNERS_NO_ACTIVE = "No active banners found";
 
     //Admin
-    public static final String ADMIN_DASHBOARD_FETCHED = "Dashboard stats";
-    public static final String ADMIN_USERS_FETCHED = "User list fetched successfully";
     public static final String ADMIN_COUPON_CREATED = "Coupon created";
-
     public static final String ADMIN_NO_USERS = "No users found";
     public static final String ADMIN_INVALID_COUPON = "Invalid coupon data";
     public static final String INVALID_TOKEN = "Invalid token";

@@ -34,7 +34,7 @@ public class CreateCouponTest {
         Response response = new AdminFlow().createCoupon(
                 spec,
                 AdminTestData.INVALID_COUPON_CODE,
-                AdminTestData.INVALID_COUPON_DESCRIPTION,
+                null,
                 AdminTestData.DISCOUNT_TYPE,
                 AdminTestData.INVALID_DISCOUNT_VALUE,
                 AdminTestData.MIN_ORDER_AMOUNT,

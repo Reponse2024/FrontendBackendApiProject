@@ -59,4 +59,14 @@ public class ResponseMessages {
 
     //Banners
     public static final String BANNERS_FETCHED = "Active banners fetched successfully";
-    public static final String BANNERS_NO_ACTIVE = "No active banners found";}
+    public static final String BANNERS_NO_ACTIVE = "No active banners found";
+
+    //Admin
+    public static final String ADMIN_DASHBOARD_FETCHED = "Dashboard stats";
+    public static final String ADMIN_USERS_FETCHED = "User list fetched successfully";
+    public static final String ADMIN_COUPON_CREATED = "Coupon created";
+
+    public static final String ADMIN_NO_USERS = "No users found";
+    public static final String ADMIN_INVALID_COUPON = "Invalid coupon data";
+    public static final String INVALID_TOKEN = "Invalid token";
+}

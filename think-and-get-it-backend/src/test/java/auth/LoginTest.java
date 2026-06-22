@@ -3,7 +3,7 @@ package auth;
 import backend.constants.HttpStatus;
 import backend.constants.ResponsePaths;
 import backend.constants.ResponseMessages;
-import backend.constants.AuthData;
+import backend.constants.authConstants.AuthData;
 import backend.implementFlow.AuthFlow;
 import io.restassured.response.Response;
 import org.testng.Assert;

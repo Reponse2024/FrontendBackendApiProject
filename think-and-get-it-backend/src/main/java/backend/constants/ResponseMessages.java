@@ -49,7 +49,7 @@ public class ResponseMessages {
     public static final String WISHLIST_ALREADY_EXISTS = "Already in wishlist";
     public static final String WISHLIST_REMOVED = "Removed from wishlist";
     public static final String WISHLIST_MOVED_TO_CART = "Wishlist item moved to cart successfully";
-    public static final String INTERNAL_ERROR = "Internal Server Error";
+    public static final String AT_LEAST_ONE_ITEM = "Wishlist should contain at least one product";
 
 
 }

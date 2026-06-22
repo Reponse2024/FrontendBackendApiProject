@@ -1,4 +1,4 @@
-package backend.constants;
+package backend.constants.authConstants;
 
 public class AuthData {
 

@@ -51,5 +51,9 @@ public class ResponseMessages {
     public static final String WISHLIST_MOVED_TO_CART = "Wishlist item moved to cart successfully";
     public static final String AT_LEAST_ONE_ITEM = "Wishlist should contain at least one product";
 
-
+    //Search
+    public static final String SEARCH_TRENDING = "Trending searches fetched successfully";
+    public static final String SEARCH_QUERY_REQUIRED = "Search query is required";
+    public static final String SEARCH_NO_RESULTS = "No products found for the given query";
+    public static final String UNAUTHORIZED = "Unauthorized access";
 }

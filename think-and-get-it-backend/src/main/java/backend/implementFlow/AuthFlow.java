@@ -2,8 +2,6 @@ package backend.implementFlow;
 
 import backend.configManager.ConfigManager;
 import backend.constants.ApiEndpoints;
-import backend.constants.AuthData;
-import backend.tokenManager.TokenManager;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

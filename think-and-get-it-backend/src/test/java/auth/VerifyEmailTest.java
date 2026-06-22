@@ -1,6 +1,6 @@
 package auth;
 
-import backend.constants.AuthData;
+import backend.constants.authConstants.AuthData;
 import backend.constants.HttpStatus;
 import backend.constants.ResponsePaths;
 import backend.constants.ResponseMessages;

@@ -8,7 +8,4 @@ public class ResponsePaths {
     public static final String MESSAGE = "message";
     public static final String SUCCESS = "success";
 
-    // Cart-specific response fields
-    public static final String CART_ITEMS = "data.items";
-    public static final String CART_TOTALS = "data.totals";
 }

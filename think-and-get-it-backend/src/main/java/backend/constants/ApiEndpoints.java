@@ -60,5 +60,10 @@ public class ApiEndpoints {
 
     //Banners
     public static final String BANNERS = "/banners";
+
+    //Admin
+    public static final String ADMIN_DASHBOARD = "/admin/dashboard";
+    public static final String ADMIN_USERS = "/admin/users";
+    public static final String ADMIN_COUPONS = "/admin/coupons";
     }
 

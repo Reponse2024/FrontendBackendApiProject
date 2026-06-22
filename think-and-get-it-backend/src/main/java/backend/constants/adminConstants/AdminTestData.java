@@ -15,5 +15,4 @@ public class AdminTestData {
 
     public static final double INVALID_DISCOUNT_VALUE = faker.number().randomDouble(2, -100, -10);
     public static final String INVALID_COUPON_CODE = faker.regexify("[!@#$%^&*]{5}");
-    public static final String INVALID_COUPON_DESCRIPTION = "";
 }

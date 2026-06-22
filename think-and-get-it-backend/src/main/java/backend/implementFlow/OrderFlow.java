@@ -132,7 +132,7 @@ public class OrderFlow {
     public Response uploadPaymentProof(RequestSpecification requestSpec) {
         String orderId = ensureOrderExists(requestSpec);
         String token = TokenManager.getAuthToken(requestSpec);
-        File proof = new File("src/test/resources/payment-prooff.png");
+        File proof = new File("src/test/resources/payment-proof.png");
         return given().spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("id", orderId)

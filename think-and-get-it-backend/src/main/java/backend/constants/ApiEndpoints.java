@@ -57,5 +57,8 @@ public class ApiEndpoints {
     public static final String SEARCH = "/search";
     public static final String SEARCH_SUGGESTIONS = "/search/suggestions";
     public static final String SEARCH_TRENDING = "/search/trending";
+
+    //Banners
+    public static final String BANNERS = "/banners";
     }
 

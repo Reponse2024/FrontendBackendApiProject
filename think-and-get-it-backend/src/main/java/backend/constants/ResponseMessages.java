@@ -56,4 +56,7 @@ public class ResponseMessages {
     public static final String SEARCH_QUERY_REQUIRED = "Search query is required";
     public static final String SEARCH_NO_RESULTS = "No products found for the given query";
     public static final String UNAUTHORIZED = "Unauthorized access";
-}
+
+    //Banners
+    public static final String BANNERS_FETCHED = "Active banners fetched successfully";
+    public static final String BANNERS_NO_ACTIVE = "No active banners found";}
